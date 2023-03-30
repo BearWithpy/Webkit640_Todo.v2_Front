@@ -4,6 +4,7 @@ import "./App.css"
 import React, { Component } from "react"
 import Hello from "./Hello"
 import Todo from "./Todo"
+import { List, Paper } from "@material-ui/core"
 
 class App extends Component {
     constructor(props) {
@@ -19,9 +20,15 @@ class App extends Component {
     }
 
     render() {
-        var todoItems = this.state.items.map((item, idx) => (
-            <Todo item={item} key={item.id} />
-        ))
+        var todoItems = this.state.items.length > 0 && (
+            <Paper style={{ margin: 16 }}>
+                <List>
+                    {this.state.items.map((item, idx) => (
+                        <Todo item={item} key={item.id} />
+                    ))}
+                </List>
+            </Paper>
+        )
         return <div className="App">{todoItems}</div>
     }
 }
