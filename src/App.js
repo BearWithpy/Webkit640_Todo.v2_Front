@@ -9,17 +9,20 @@ class App extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            item: { id: 0, title: "Hello 1", done: true },
+            items: [
+                { id: 0, title: "Hello 1", done: true },
+                { id: 1, title: "Hello 2", done: false },
+                { id: 2, title: "Hello 3", done: true },
+                { id: 3, title: "Hello 4", done: false },
+            ],
         }
     }
 
     render() {
-        return (
-            <div className="App">
-                <Hello />
-                <Todo item={this.state.item} />
-            </div>
-        )
+        var todoItems = this.state.items.map((item, idx) => (
+            <Todo item={item} key={item.id} />
+        ))
+        return <div className="App">{todoItems}</div>
     }
 }
 
