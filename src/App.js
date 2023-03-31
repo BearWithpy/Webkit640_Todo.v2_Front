@@ -1,10 +1,9 @@
-import logo from "./logo.svg"
 import "./App.css"
 
 import React, { Component } from "react"
-import Hello from "./Hello"
+
 import Todo from "./Todo"
-import { List, Paper } from "@material-ui/core"
+import { List, Paper } from "@mui/material"
 
 class App extends Component {
     constructor(props) {

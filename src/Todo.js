@@ -1,5 +1,5 @@
-import { InputBase, ListItem, ListItemText } from "@material-ui/core"
-import { CheckBox } from "@material-ui/icons"
+import { Checkbox, InputBase, ListItem, ListItemText } from "@mui/material"
+
 import React, { Component } from "react"
 
 class Todo extends Component {
@@ -10,17 +10,16 @@ class Todo extends Component {
         }
     }
     render() {
-        const item = this.state.item
         return (
             <ListItem>
-                <CheckBox checked={item.done} />
+                <Checkbox checked={this.state.item.done} />
                 <ListItemText>
                     <InputBase
                         inputProps={{ "aria-label": "naked" }}
                         type="text"
-                        id={item.id}
-                        name={item.id}
-                        value={item.title}
+                        id={String(this.state.item.id)}
+                        name={String(this.state.item.id)}
+                        value={this.state.item.title}
                         multiline={true}
                         fullWidth={true}
                     />
