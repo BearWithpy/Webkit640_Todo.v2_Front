@@ -1,13 +1,11 @@
-import React, { Component } from "react"
+import React from "react"
 
-class Hello extends Component {
-    render() {
-        return (
-            <div>
-                <label for="hello">안녕하십니까,</label>
-            </div>
-        )
-    }
+const Hello = () => {
+    return (
+        <div>
+            <label for="hello">안녕하십니까!!! Hello World!!!</label>
+        </div>
+    )
 }
 
 export default Hello

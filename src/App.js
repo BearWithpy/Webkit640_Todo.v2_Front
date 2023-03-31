@@ -1,35 +1,26 @@
 import "./App.css"
 
-import React, { Component } from "react"
-
 import Todo from "./Todo"
 import { List, Paper } from "@mui/material"
 
-class App extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            items: [
-                { id: 0, title: "Hello 1", done: true },
-                { id: 1, title: "Hello 2", done: false },
-                { id: 2, title: "Hello 3", done: true },
-                { id: 3, title: "Hello 4", done: false },
-            ],
-        }
-    }
+import React from "react"
+import Hello from "./Hello"
 
-    render() {
-        var todoItems = this.state.items.length > 0 && (
-            <Paper style={{ margin: 16 }}>
-                <List>
-                    {this.state.items.map((item, idx) => (
-                        <Todo item={item} key={item.id} />
-                    ))}
-                </List>
-            </Paper>
-        )
-        return <div className="App">{todoItems}</div>
-    }
+const App = () => {
+    // const todoItems = this.state.items.length > 0 && (
+    //     <Paper style={{ margin: 16 }}>
+    //         <List>
+    //             {this.state.items.map((item, idx) => (
+    //                 <Todo item={item} key={item.id} />
+    //             ))}
+    //         </List>
+    //     </Paper>
+    // )
+    return (
+        <div className="App">
+            <Hello />
+        </div>
+    )
 }
 
 export default App
