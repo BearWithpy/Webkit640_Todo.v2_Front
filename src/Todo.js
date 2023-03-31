@@ -7,59 +7,44 @@ import {
     ListItemSecondaryAction,
     ListItemText,
 } from "@mui/material"
-import { useState } from "react"
 
-const Todo = ({ item, del, toggleDone, edit }) => {
-    const [readOnly, setReadOnly] = useState(true)
-    const [thisItem, setThisItem] = useState(item)
+import React, { useState } from "react"
 
-    const checkBoxEventHandler = (e) => {
-        thisItem.done = !thisItem.done
-        // setThisItem(thisItem)
-        toggleDone(thisItem)
-        // setReadOnly(true)
-    }
+const Todo = ({ item, del }) => {
+    const [itemState, setItemState] = useState(item)
 
-    const deleteEventHandler = (e) => {
+    const deleteEventHandler = () => {
         del(item)
     }
 
-    const offReadOnlyMode = () => {
-        setReadOnly(false)
-    }
+    // const editEventHandler = (e) => {
+    //     itemState.title = e.target.value
+    // }
 
-    const editEventHandler = (e) => {
-        thisItem.title = e.target.value
-        // setThisItem(thisItem)
-    }
-
-    const enterKeyEventHandler = (e) => {
-        if (e.key === "Enter") {
-            setReadOnly(true)
-            edit(thisItem)
-        }
+    const checkBoxEventHandler = (e) => {
+        console.log(itemState)
+        itemState.done = !itemState.done
+        setItemState(itemState)
     }
 
     return (
         <ListItem>
-            <Checkbox checked={thisItem.done} onChange={checkBoxEventHandler} />
+            <Checkbox
+                checked={itemState.done}
+                onChange={checkBoxEventHandler}
+            />
             <ListItemText>
                 <InputBase
-                    inputProps={{
-                        "aria-label": "naked",
-                        readOnly,
-                    }}
+                    inputProps={{ "aria-label": "naked" }}
                     type="text"
-                    id={String(item.id)}
-                    name={String(item.id)}
-                    value={item.title}
+                    id={String(itemState.id)}
+                    name={String(itemState.id)}
+                    value={itemState.title}
                     multiline={true}
                     fullWidth={true}
-                    onClick={offReadOnlyMode}
-                    onChange={editEventHandler}
-                    onKeyDown={enterKeyEventHandler}
                 />
             </ListItemText>
+
             <ListItemSecondaryAction>
                 <IconButton aria-label="Delete" onClick={deleteEventHandler}>
                     <DeleteOutlined />
