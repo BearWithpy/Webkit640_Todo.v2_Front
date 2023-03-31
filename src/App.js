@@ -23,8 +23,7 @@ const App = () => {
 
     const del = (i) => {
         const newItems = items.filter((e) => e.id !== i.id)
-        i.id = "ID-" + items.length
-        setItems(...newItems)
+        setItems(newItems)
     }
     ///////////////////////
     const edit = (i) => {
@@ -34,9 +33,10 @@ const App = () => {
     }
 
     const toggleDone = (i) => {
-        const newItems = items.filter((e) => e.id !== i.id)
-        i.id = "ID-" + items.length
-        setItems(...newItems)
+        const newItems = items.filter((e) => e.id === i.id)
+        console.log(newItems)
+        // i.id = "ID-" + items.length
+        // setItems(...newItems)
     }
     /////////////////////
     const todoItems = items.length > 0 && (

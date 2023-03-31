@@ -1,36 +1,55 @@
-import { Checkbox, InputBase, ListItem, ListItemText } from "@mui/material"
+import { DeleteOutlined } from "@mui/icons-material"
+import {
+    Checkbox,
+    IconButton,
+    InputBase,
+    ListItem,
+    ListItemSecondaryAction,
+    ListItemText,
+} from "@mui/material"
 
 import React, { useState } from "react"
 
 const Todo = ({ item, del }) => {
-    const [editItem, setEditItem] = useState(item)
+    const [itemState, setItemState] = useState(item)
 
     const deleteEventHandler = () => {
         del(item)
     }
 
-    const editEventHandler = (e) => {
-        editItem.title = e.target.value
-    }
+    // const editEventHandler = (e) => {
+    //     itemState.title = e.target.value
+    // }
 
     const checkBoxEventHandler = (e) => {
-        item.done = !item.done
+        console.log(itemState)
+        itemState.done = !itemState.done
+        setItemState(itemState)
     }
 
     return (
         <ListItem>
-            <Checkbox checked={item.done} />
+            <Checkbox
+                checked={itemState.done}
+                onChange={checkBoxEventHandler}
+            />
             <ListItemText>
                 <InputBase
                     inputProps={{ "aria-label": "naked" }}
                     type="text"
-                    id={String(item.id)}
-                    name={String(item.id)}
-                    value={item.title}
+                    id={String(itemState.id)}
+                    name={String(itemState.id)}
+                    value={itemState.title}
                     multiline={true}
                     fullWidth={true}
                 />
             </ListItemText>
+
+            <ListItemSecondaryAction>
+                <IconButton aria-label="Delete" onClick={deleteEventHandler}>
+                    <DeleteOutlined />
+                </IconButton>
+            </ListItemSecondaryAction>
         </ListItem>
     )
 }
