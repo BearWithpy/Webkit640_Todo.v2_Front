@@ -3,7 +3,8 @@ import "./App.css"
 import React, { Component } from "react"
 
 import Todo from "./Todo"
-import { List, Paper } from "@mui/material"
+import { Container, List, Paper } from "@mui/material"
+import AddTodo from "./AddTodo"
 
 class App extends Component {
     constructor(props) {
@@ -36,7 +37,14 @@ class App extends Component {
                 </List>
             </Paper>
         )
-        return <div className="App">{todoItems}</div>
+        return (
+            <div className="App">
+                <Container maxWidth="md">
+                    <AddTodo add={this.add} />
+                    <div className="todoList">{todoItems}</div>
+                </Container>
+            </div>
+        )
     }
 }
 

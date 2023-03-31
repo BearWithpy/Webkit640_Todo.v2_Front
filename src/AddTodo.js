@@ -1,4 +1,4 @@
-import { Grid, Paper } from "@mui/material"
+import { Button, Grid, Paper, TextField } from "@mui/material"
 import React, { Component } from "react"
 
 class AddTodo extends Component {
@@ -29,9 +29,26 @@ class AddTodo extends Component {
     render() {
         return (
             <Paper style={{ margin: 16, padding: 16 }}>
-                <Grid>
-                    <Grid></Grid>
-                    <Grid></Grid>
+                <Grid container>
+                    <Grid xs={11} md={11} item style={{ paddingRight: 16 }}>
+                        <TextField
+                            placeholder="Add Todo here :)"
+                            fullWidth
+                            onChange={this.onInputChange}
+                            value={this.state.item.title}
+                            onKeyDown={this.enterKeyEventHandler}
+                        />
+                    </Grid>
+                    <Grid xs={1} md={1} item>
+                        <Button
+                            fullWidth
+                            color="secondary"
+                            variant="outlined"
+                            onClick={this.onButtonClick}
+                        >
+                            Save
+                        </Button>
+                    </Grid>
                 </Grid>
             </Paper>
         )
