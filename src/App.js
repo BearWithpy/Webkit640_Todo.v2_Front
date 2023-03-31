@@ -27,23 +27,33 @@ const App = () => {
     }
     ///////////////////////
     const edit = (i) => {
-        const newItems = items.filter((e) => e.id !== i.id)
-        i.id = "ID-" + items.length
-        setItems(...newItems)
+        const newItems = items.map((todo) =>
+            todo.id === i.id ? { ...todo, title: i.title } : todo
+        )
+        console.log(newItems)
+
+        // setItems(...newItems)
     }
 
     const toggleDone = (i) => {
-        const newItems = items.filter((e) => e.id === i.id)
-        console.log(newItems)
-        // i.id = "ID-" + items.length
-        // setItems(...newItems)
+        const newItems = items.map((todo) =>
+            todo.id === i.id ? { ...todo, done: !todo.done } : todo
+        )
+
+        setItems(newItems)
     }
     /////////////////////
     const todoItems = items.length > 0 && (
         <Paper style={{ margin: 16 }}>
             <List>
                 {items.map((item, _) => (
-                    <Todo item={item} key={item.id} del={del} />
+                    <Todo
+                        item={item}
+                        key={item.id}
+                        del={del}
+                        edit={edit}
+                        toggleDone={toggleDone}
+                    />
                 ))}
             </List>
         </Paper>
