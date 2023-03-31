@@ -1,7 +1,7 @@
 import { Button, Grid, Paper, TextField } from "@mui/material"
 import React, { useState } from "react"
 
-const AddTodo = ({ add, items, setItems }) => {
+const AddTodo = ({ add }) => {
     const [item, setItem] = useState({ title: "" })
 
     const onInputChange = (e) => {
@@ -10,7 +10,6 @@ const AddTodo = ({ add, items, setItems }) => {
     }
     const onButtonClick = (e) => {
         add(item)
-        setItems([...items, item])
         setItem({ title: "" })
     }
     const enterKeyEventHandler = (e) => {

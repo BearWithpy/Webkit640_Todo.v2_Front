@@ -1,8 +1,22 @@
 import { Checkbox, InputBase, ListItem, ListItemText } from "@mui/material"
 
-import React from "react"
+import React, { useState } from "react"
 
-const Todo = ({ item }) => {
+const Todo = ({ item, del }) => {
+    const [editItem, setEditItem] = useState(item)
+
+    const deleteEventHandler = () => {
+        del(item)
+    }
+
+    const editEventHandler = (e) => {
+        editItem.title = e.target.value
+    }
+
+    const checkBoxEventHandler = (e) => {
+        item.done = !item.done
+    }
+
     return (
         <ListItem>
             <Checkbox checked={item.done} />

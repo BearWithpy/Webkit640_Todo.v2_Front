@@ -18,14 +18,32 @@ const App = () => {
     const add = (i) => {
         i.id = "ID-" + items.length
         i.done = false
-        items.push(i)
+        setItems([...items, i])
     }
 
+    const del = (i) => {
+        const newItems = items.filter((e) => e.id !== i.id)
+        i.id = "ID-" + items.length
+        setItems(...newItems)
+    }
+    ///////////////////////
+    const edit = (i) => {
+        const newItems = items.filter((e) => e.id !== i.id)
+        i.id = "ID-" + items.length
+        setItems(...newItems)
+    }
+
+    const toggleDone = (i) => {
+        const newItems = items.filter((e) => e.id !== i.id)
+        i.id = "ID-" + items.length
+        setItems(...newItems)
+    }
+    /////////////////////
     const todoItems = items.length > 0 && (
         <Paper style={{ margin: 16 }}>
             <List>
                 {items.map((item, _) => (
-                    <Todo item={item} key={item.id} />
+                    <Todo item={item} key={item.id} del={del} />
                 ))}
             </List>
         </Paper>
@@ -35,7 +53,7 @@ const App = () => {
         <div className="App">
             {/* <Hello /> */}
             <Container maxWidth="md">
-                <AddTodo add={add} items={items} setItems={setItems} />
+                <AddTodo add={add} />
                 <div className="todoList">{todoItems}</div>
             </Container>
         </div>
