@@ -2,17 +2,17 @@ import { Checkbox, InputBase, ListItem, ListItemText } from "@mui/material"
 
 import React from "react"
 
-const Todo = (props) => {
+const Todo = ({ item }) => {
     return (
         <ListItem>
-            <Checkbox checked={props.item.done} />
+            <Checkbox checked={item.done} />
             <ListItemText>
                 <InputBase
                     inputProps={{ "aria-label": "naked" }}
                     type="text"
-                    id={String(props.item.id)}
-                    name={String(props.item.id)}
-                    value={props.item.title}
+                    id={String(item.id)}
+                    name={String(item.id)}
+                    value={item.title}
                     multiline={true}
                     fullWidth={true}
                 />
