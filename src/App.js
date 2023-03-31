@@ -18,6 +18,14 @@ class App extends Component {
         }
     }
 
+    add = (item) => {
+        const thisItems = this.state.items
+        item.id = "ID-" + thisItems.length
+        item.done = false
+        thisItems.push(item)
+        this.setState({ items: thisItems })
+    }
+
     render() {
         var todoItems = this.state.items.length > 0 && (
             <Paper style={{ margin: 16 }}>
