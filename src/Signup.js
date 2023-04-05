@@ -34,7 +34,7 @@ class SignUp extends Component {
             <Container
                 component="main"
                 maxWidth="xs"
-                style={{ marginTop: "20%" }}
+                style={{ marginTop: "15%" }}
             >
                 <form noValidate onSubmit={this.handleSubmit}>
                     <Grid container spacing={2}>

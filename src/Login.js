@@ -28,7 +28,7 @@ class Login extends Component {
             <Container
                 component="main"
                 maxWidth="xs"
-                style={{ marginTop: "20%" }}
+                style={{ marginTop: "15%" }}
             >
                 <Grid item xs={12} style={{ margin: "20px" }}>
                     <Typography component="h1" variant="h5">

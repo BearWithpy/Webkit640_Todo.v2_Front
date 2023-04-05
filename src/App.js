@@ -82,7 +82,10 @@ class App extends Component {
                 <Toolbar>
                     <Grid justifyContent="space-between" container>
                         <Grid item>
-                            <Typography variant="h6">오늘의 할일</Typography>
+                            <Typography variant="h6">
+                                {localStorage.getItem("USER_NAME")}의 오늘의
+                                할일
+                            </Typography>
                         </Grid>
                         <Grid item>
                             <Button color="inherit" onClick={signout}>
