@@ -13,50 +13,44 @@ import React, { Component } from "react"
 class Todo extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            item: props.item,
-            readOnly: true,
-        }
+        this.state = { item: props.item, readOnly: true }
         this.delete = props.delete
         this.update = props.update
     }
 
-    checkBoxEventHandler = (e) => {
-        const thisItem = this.state.item
-        thisItem.done = !thisItem.done
-        this.setState({ readOnly: true })
-        this.update(this.state.item)
-    }
-
-    deleteEventHandler = (e) => {
+    deleteEventHandler = () => {
         this.delete(this.state.item)
     }
-
     offReadOnlyMode = () => {
         this.setState({ readOnly: false }, () => {
-            console.log("readOnly? ", this.state.readOnly)
+            console.log("ReadOnly?", this.state.readOnly)
         })
     }
-
-    editEventHandler = (e) => {
-        const thisItem = this.state.item
-        thisItem.title = e.target.value
-        this.setState({ item: thisItem })
-    }
-
     enterKeyEventHandler = (e) => {
         if (e.key === "Enter") {
             this.setState({ readOnly: true })
             this.update(this.state.item)
         }
     }
-
+    editEventHandler = (e) => {
+        const thisItem = this.state.item
+        thisItem.title = e.target.value
+        this.setState({ item: thisItem })
+    }
+    checkboxEventHander = (e) => {
+        const thisItem = this.state.item
+        // thisItem.done = thisItem.done ? false : true
+        thisItem.done = !thisItem.done
+        this.setState({ readOnly: true })
+        this.update(this.state.item)
+    }
     render() {
+        const item = this.state.item
         return (
             <ListItem>
                 <Checkbox
-                    checked={this.state.item.done}
-                    onChange={this.checkBoxEventHandler}
+                    checked={item.done}
+                    onChange={this.checkboxEventHander}
                 />
                 <ListItemText>
                     <InputBase
@@ -65,14 +59,14 @@ class Todo extends Component {
                             readOnly: this.state.readOnly,
                         }}
                         type="text"
-                        id={String(this.state.item.id)}
-                        name={String(this.state.item.id)}
-                        value={this.state.item.title}
+                        id={item.id}
+                        name={item.id}
+                        value={item.title}
                         multiline={true}
                         fullWidth={true}
                         onClick={this.offReadOnlyMode}
                         onChange={this.editEventHandler}
-                        onKeyDown={this.enterKeyEventHandler}
+                        onKeyPress={this.enterKeyEventHandler}
                     />
                 </ListItemText>
 

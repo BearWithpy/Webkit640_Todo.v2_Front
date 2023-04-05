@@ -1,10 +1,53 @@
 import { API_BASE_URL } from "../app-config"
 
+// export function call(api, method, request) {
+//     let headers = new Headers({
+//         "Content-Type": "application/json",
+//     })
+
+//     const accessToken = localStorage.getItem("ACCESS_TOKEN")
+//     if (accessToken) {
+//         headers.append("Authorization", "Bearer " + accessToken)
+//     }
+
+//     let options = {
+//         headers: headers,
+//         url: API_BASE_URL + api,
+//         method: method,
+//     }
+
+//     if (request) {
+//         options.body = JSON.stringify(request)
+//     }
+
+//     return fetch(options.url, options)
+//         .then((response) => {
+//             response.json().then((json) => {
+//                 ////////////////////////////////
+//                 // if (response.status === 403) {
+//                 //     window.location.href = "/login"
+//                 // }
+//                 /////////////////////////////////
+//                 if (!response.ok) {
+//                     return Promise.reject(json)
+//                 }
+//                 return json
+//             })
+//         })
+//         .catch((error) => {
+//             console.log("=================> ", error.status)
+//             if (error.status === 403) {
+//                 window.location.href = "/login"
+//             }
+//             return Promise.reject(error)
+//         })
+// }
+
+// 교수님 코드
 export function call(api, method, request) {
     let headers = new Headers({
         "Content-Type": "application/json",
     })
-
     const accessToken = localStorage.getItem("ACCESS_TOKEN")
     if (accessToken) {
         headers.append("Authorization", "Bearer " + accessToken)
@@ -15,27 +58,22 @@ export function call(api, method, request) {
         url: API_BASE_URL + api,
         method: method,
     }
-
     if (request) {
         options.body = JSON.stringify(request)
     }
-
     return fetch(options.url, options)
-        .then((response) => {
+        .then((response) =>
             response.json().then((json) => {
-                ////////////////////////////////
-                if (response.status === 403) {
-                    window.location.href = "/login"
-                }
-                /////////////////////////////////
                 if (!response.ok) {
                     return Promise.reject(json)
                 }
                 return json
             })
-        })
+        )
         .catch((error) => {
-            console.log("=================> ", error.status)
+            console.log("Oops!")
+            console.log(error.status)
+            console.log("Ooops!")
             if (error.status === 403) {
                 window.location.href = "/login"
             }
@@ -55,7 +93,9 @@ export function signin(userDTO) {
 export function signup(userDTO) {
     return call("/auth/signup", "POST", userDTO)
         .then((response) => {
-            window.location.href = "/"
+            if (response.id) {
+                window.location.href = "/"
+            }
         })
         .catch((error) => {
             if (error.status === 403) {

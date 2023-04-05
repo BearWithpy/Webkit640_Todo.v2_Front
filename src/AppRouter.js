@@ -3,11 +3,12 @@ import React, { Component } from "react"
 import { Routes, Route, BrowserRouter } from "react-router-dom"
 import App from "./App"
 import Login from "./Login"
+import SignUp from "./Signup"
 
-function CopyRight() {
+function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
-            {"Copyright © "}
+            {"Copyright ⓒ "}
             fsoftwareengineer, {new Date().getFullYear()}
             {"."}
         </Typography>
@@ -20,19 +21,18 @@ class AppRouter extends Component {
             <BrowserRouter>
                 <div>
                     <Routes>
-                        <Route path="/login" element={<Login />}></Route>
-                        <Route path="/" element={<App />}></Route>
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/signup" element={<SignUp />} />
+                        <Route path="/" element={<App />} />
                     </Routes>
                 </div>
-
                 <div>
                     <Box mt={5}>
-                        <CopyRight />
+                        <Copyright />
                     </Box>
                 </div>
             </BrowserRouter>
         )
     }
 }
-
 export default AppRouter

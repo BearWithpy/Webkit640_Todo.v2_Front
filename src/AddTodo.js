@@ -7,15 +7,13 @@ class AddTodo extends Component {
         this.state = { item: { title: "" } }
         this.add = props.add
     }
-
     onInputChange = (e) => {
         const thisItem = this.state.item
         thisItem.title = e.target.value
         this.setState({ item: thisItem })
-        // console.log(thisItem)
     }
 
-    onButtonClick = (e) => {
+    onButtonClick = () => {
         this.add(this.state.item)
         this.setState({ item: { title: "" } })
     }
@@ -25,18 +23,17 @@ class AddTodo extends Component {
             this.onButtonClick()
         }
     }
-
     render() {
         return (
             <Paper style={{ margin: 16, padding: 16 }}>
                 <Grid container>
                     <Grid xs={11} md={11} item style={{ paddingRight: 16 }}>
                         <TextField
-                            placeholder="Add Todo here :)"
+                            placeholder="Add Todo here"
                             fullWidth
                             onChange={this.onInputChange}
                             value={this.state.item.title}
-                            onKeyDown={this.enterKeyEventHandler}
+                            onKeyPress={this.enterKeyEventHandler}
                         />
                     </Grid>
                     <Grid xs={1} md={1} item>

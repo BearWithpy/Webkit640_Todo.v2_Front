@@ -3,40 +3,62 @@ import "./App.css"
 import React, { Component } from "react"
 
 import Todo from "./Todo"
-import { Container, List, Paper } from "@mui/material"
+import {
+    AppBar,
+    Button,
+    Container,
+    Grid,
+    List,
+    Paper,
+    Toolbar,
+    Typography,
+} from "@mui/material"
 import AddTodo from "./AddTodo"
-import { call } from "./service/ApiService"
+import { call, signout } from "./service/ApiService"
 
 class App extends Component {
     constructor(props) {
         super(props)
         this.state = {
             items: [],
+            loading: true,
         }
     }
 
     add = (item) => {
-        call("/todo", "POST", item).then((res) => {
-            this.setState({ items: res.data })
-        })
+        call("/todo", "POST", item).then((response) =>
+            this.setState({ items: response.data })
+        )
     }
 
     delete = (item) => {
-        call("/todo", "DELETE", item).then((res) => {
-            this.setState({ items: res.data })
-        })
+        call("/todo", "DELETE", item).then((response) =>
+            this.setState({ items: response.data })
+        )
     }
 
     update = (item) => {
-        call("/todo", "PUT", item).then((res) => {
-            this.setState({ items: res.data })
-        })
+        call("/todo", "PUT", item).then((response) =>
+            this.setState({ items: response.data })
+        )
     }
 
+    // deleteForCompleted = () => {
+    //     const thisItems = this.state.items
+    //     console.log("Before deleteForCompleted Items : ", this.state.items)
+    //     thisItems.map((e) => {
+    //         if (e.done === true) {
+    //             call("/todo", "DELETE", e).then((response) =>
+    //                 this.setState({ items: response.data })
+    //             )
+    //         }
+    //     })
+    // }
+
     componentDidMount() {
-        call("/todo", "GET", null).then((res) => {
-            this.setState({ items: res.data })
-        })
+        call("/todo", "GET", null).then((response) =>
+            this.setState({ items: response.data, loading: false })
+        )
     }
 
     render() {
@@ -54,14 +76,43 @@ class App extends Component {
                 </List>
             </Paper>
         )
-        return (
-            <div className="App">
+
+        var navigationBar = (
+            <AppBar position="static">
+                <Toolbar>
+                    <Grid justifyContent="space-between" container>
+                        <Grid item>
+                            <Typography variant="h6">오늘의 할일</Typography>
+                        </Grid>
+                        <Grid item>
+                            <Button color="inherit" onClick={signout}>
+                                logout
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Toolbar>
+            </AppBar>
+        )
+
+        var todoListPage = (
+            <div>
+                {navigationBar}
                 <Container maxWidth="md">
                     <AddTodo add={this.add} />
-                    <div className="todoList">{todoItems}</div>
+                    <div className="TodoList">{todoItems}</div>
                 </Container>
+                {/* <DeleteTodo deleteForCompleted={this.deleteForCompleted} /> */}
             </div>
         )
+
+        var loadingPage = <h1>로딩중..</h1>
+        var content = loadingPage
+
+        if (!this.state.loading) {
+            content = todoListPage
+        }
+
+        return <div className="App">{content}</div>
     }
 }
 
