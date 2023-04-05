@@ -5,33 +5,37 @@ import React, { Component } from "react"
 import Todo from "./Todo"
 import { Container, List, Paper } from "@mui/material"
 import AddTodo from "./AddTodo"
+import { call } from "./service/ApiService"
 
 class App extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            items: [
-                { id: 0, title: "Hello 1", done: true },
-                { id: 1, title: "Hello 2", done: false },
-                { id: 2, title: "Hello 3", done: true },
-                { id: 3, title: "Hello 4", done: false },
-            ],
+            items: [],
         }
     }
 
     add = (item) => {
-        const thisItems = this.state.items
-        item.id = "ID-" + thisItems.length
-        item.done = false
-        thisItems.push(item)
-        this.setState({ items: thisItems })
+        call("/todo", "POST", item).then((res) => {
+            this.setState({ items: res.data })
+        })
     }
 
     delete = (item) => {
-        const thisItems = this.state.items
-        const newItems = thisItems.filter((e) => e.id !== item.id)
-        this.setState({ items: newItems }, () => {
-            console.log(this.state.items)
+        call("/todo", "DELETE", item).then((res) => {
+            this.setState({ items: res.data })
+        })
+    }
+
+    update = (item) => {
+        call("/todo", "PUT", item).then((res) => {
+            this.setState({ items: res.data })
+        })
+    }
+
+    componentDidMount() {
+        call("/todo", "GET", null).then((res) => {
+            this.setState({ items: res.data })
         })
     }
 
@@ -40,7 +44,12 @@ class App extends Component {
             <Paper style={{ margin: 16 }}>
                 <List>
                     {this.state.items.map((item, idx) => (
-                        <Todo item={item} key={item.id} delete={this.delete} />
+                        <Todo
+                            item={item}
+                            key={item.id}
+                            delete={this.delete}
+                            update={this.update}
+                        />
                     ))}
                 </List>
             </Paper>

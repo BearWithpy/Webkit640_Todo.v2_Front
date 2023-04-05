@@ -18,12 +18,14 @@ class Todo extends Component {
             readOnly: true,
         }
         this.delete = props.delete
+        this.update = props.update
     }
 
     checkBoxEventHandler = (e) => {
         const thisItem = this.state.item
         thisItem.done = !thisItem.done
-        this.setState({ item: thisItem })
+        this.setState({ readOnly: true })
+        this.update(this.state.item)
     }
 
     deleteEventHandler = (e) => {
@@ -45,6 +47,7 @@ class Todo extends Component {
     enterKeyEventHandler = (e) => {
         if (e.key === "Enter") {
             this.setState({ readOnly: true })
+            this.update(this.state.item)
         }
     }
 
