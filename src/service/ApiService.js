@@ -20,7 +20,6 @@ export default function call(api, method, request) {
     return fetch(options.url, options)
         .then((response) =>
             response.json().then((json) => {
-                // console.log(response)
                 if (!response.ok) {
                     return Promise.reject(json)
                 }
@@ -28,10 +27,6 @@ export default function call(api, method, request) {
             })
         )
         .catch((error) => {
-            // console.log("Oops!")
-            // console.log(error.status)
-            // console.log("Ooops!")
-
             if (error.status === 403) {
                 window.location.href = "/login"
             }

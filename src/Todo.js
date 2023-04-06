@@ -22,7 +22,6 @@ const Todo = (props) => {
 
     const offReadOnlyMode = () => {
         setReadOnly(false)
-        // console.log("ReadOnly?", readOnly)
     }
 
     const enterKeyEventHandler = (e) => {
@@ -40,7 +39,9 @@ const Todo = (props) => {
 
     const checkboxEventHander = (e) => {
         const thisItem = { ...item }
-        thisItem.done = !thisItem.done
+        // thisItem.done = !thisItem.done
+        thisItem.done = thisItem.done ? false : true
+        setItem(thisItem)
         setReadOnly(true)
         updateItem(thisItem)
     }
