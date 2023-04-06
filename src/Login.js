@@ -7,7 +7,7 @@ import {
     Typography,
 } from "@mui/material"
 import React from "react"
-// import { signin } from "./service/ApiService"
+import { signin } from "./service/ApiService"
 
 // class Login extends Component {
 //     constructor(props) {
@@ -95,8 +95,9 @@ const Login = () => {
         const email = data.get("email")
         const password = data.get("password")
 
-        // signin({ email: email, password: password })
+        signin({ email: email, password: password })
     }
+
     return (
         <Container component="main" maxWidth="xs" style={{ marginTop: "15%" }}>
             <Grid item xs={12} style={{ margin: "20px" }}>
