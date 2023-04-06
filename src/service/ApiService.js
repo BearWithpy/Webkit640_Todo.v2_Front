@@ -31,6 +31,9 @@ export default function call(api, method, request) {
             console.log("Oops!")
             console.log(error.status)
             console.log("Ooops!")
+
+            alert("Ooops! Wrong ID or Password :(")
+
             if (error.status === 403) {
                 window.location.href = "/login"
             }

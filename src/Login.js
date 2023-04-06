@@ -14,7 +14,7 @@ const Login = () => {
         event.preventDefault()
 
         const data = new FormData(event.target)
-        const username = data.get("username")
+        // const username = data.get("username")
         const email = data.get("email")
         const password = data.get("password")
 
