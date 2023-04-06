@@ -32,11 +32,11 @@ export default function call(api, method, request) {
             console.log(error.status)
             console.log("Ooops!")
 
-            alert("Ooops! Wrong ID or Password :(")
-
             if (error.status === 403) {
                 window.location.href = "/login"
             }
+
+            alert("Ooops! Wrong ID or Password :(")
             return Promise.reject(error)
         })
 }
@@ -68,5 +68,5 @@ export function signup(userDTO) {
 
 export function signout() {
     localStorage.setItem("ACCESS_TOKEN", null)
-    window.location.href = "/"
+    window.location.href = "/login"
 }
