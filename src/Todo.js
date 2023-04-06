@@ -22,7 +22,7 @@ const Todo = (props) => {
 
     const offReadOnlyMode = () => {
         setReadOnly(false)
-        console.log("ReadOnly?", readOnly)
+        // console.log("ReadOnly?", readOnly)
     }
 
     const enterKeyEventHandler = (e) => {
