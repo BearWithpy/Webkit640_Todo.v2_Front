@@ -10,38 +10,59 @@ import {
 
 import React, { useState } from "react"
 
-const Todo = ({ item, del }) => {
-    const [itemState, setItemState] = useState(item)
+const Todo = (props) => {
+    const [item, setItem] = useState(props.item)
+    const [readOnly, setReadOnly] = useState(true)
+    const deleteItem = props.del
+    const updateItem = props.update
 
     const deleteEventHandler = () => {
-        del(item)
+        deleteItem(item)
     }
 
-    // const editEventHandler = (e) => {
-    //     itemState.title = e.target.value
-    // }
+    const offReadOnlyMode = () => {
+        setReadOnly(false)
+        console.log("ReadOnly?", readOnly)
+    }
 
-    const checkBoxEventHandler = (e) => {
-        console.log(itemState)
-        itemState.done = !itemState.done
-        setItemState(itemState)
+    const enterKeyEventHandler = (e) => {
+        if (e.key === "Enter") {
+            setReadOnly(true)
+            updateItem(item)
+        }
+    }
+
+    const editEventHandler = (e) => {
+        const thisItem = { ...item }
+        thisItem.title = e.target.value
+        setItem(thisItem)
+    }
+
+    const checkboxEventHander = (e) => {
+        const thisItem = { ...item }
+        thisItem.done = !thisItem.done
+        setReadOnly(true)
+        updateItem(thisItem)
     }
 
     return (
         <ListItem>
-            <Checkbox
-                checked={itemState.done}
-                onChange={checkBoxEventHandler}
-            />
+            <Checkbox checked={item.done} onChange={checkboxEventHander} />
             <ListItemText>
                 <InputBase
-                    inputProps={{ "aria-label": "naked" }}
+                    inputProps={{
+                        "aria-label": "naked",
+                        readOnly: readOnly,
+                    }}
                     type="text"
-                    id={String(itemState.id)}
-                    name={String(itemState.id)}
-                    value={itemState.title}
+                    id={item.id}
+                    name={item.id}
+                    value={item.title}
                     multiline={true}
                     fullWidth={true}
+                    onClick={offReadOnlyMode}
+                    onChange={editEventHandler}
+                    onKeyPress={enterKeyEventHandler}
                 />
             </ListItemText>
 

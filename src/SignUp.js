@@ -7,6 +7,7 @@ import {
     Typography,
 } from "@mui/material"
 import React from "react"
+import { signup } from "./service/ApiService"
 
 const SignUp = () => {
     const handleSubmit = (event) => {
@@ -16,11 +17,11 @@ const SignUp = () => {
         const username = data.get("username")
         const email = data.get("email")
         const password = data.get("password")
-        // signup({ email: email, username: username, password: password }).then(
-        //     (response) => {
-        //         window.location.href = "/login"
-        //     }
-        // )
+        signup({ email: email, username: username, password: password }).then(
+            (response) => {
+                window.location.href = "/login"
+            }
+        )
     }
 
     return (
