@@ -12,7 +12,7 @@ const AddTodo = ({ add }) => {
 
     const onButtonClick = () => {
         add(item)
-        setItem({ title: "" }) // text 값을 추가하고 입력 필드는 초기화시킨다.
+        setItem({ title: "" })
     }
 
     const enterKeyEventHandler = (e) => {

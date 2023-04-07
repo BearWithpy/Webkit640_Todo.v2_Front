@@ -8,13 +8,29 @@ import {
     ListItemText,
 } from "@mui/material"
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 const Todo = (props) => {
     const [item, setItem] = useState(props.item)
     const [readOnly, setReadOnly] = useState(true)
     const deleteItem = props.del
     const updateItem = props.update
+
+    const [lineStyle, setlineStyle] = useState({
+        textDecoration: "none",
+    })
+
+    useEffect(() => {
+        setlineStyle(
+            item.done
+                ? {
+                      textDecoration: "line-through",
+                  }
+                : {
+                      textDecoration: "none",
+                  }
+        )
+    }, [item.done])
 
     const deleteEventHandler = () => {
         deleteItem(item)
@@ -64,6 +80,7 @@ const Todo = (props) => {
                     onClick={offReadOnlyMode}
                     onChange={editEventHandler}
                     onKeyPress={enterKeyEventHandler}
+                    style={lineStyle}
                 />
             </ListItemText>
 
