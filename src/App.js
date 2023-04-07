@@ -90,12 +90,11 @@ const App = () => {
             {navigationBar}
             <Container maxWidth="md">
                 <AddTodo add={add} />
+                <div className="TodoList">{todoItems}</div>
                 <DeleteTodo
                     deleteCompleted={deleteCompleted}
                     deleteAll={deleteAll}
                 />
-
-                <div className="TodoList">{todoItems}</div>
             </Container>
         </div>
     )

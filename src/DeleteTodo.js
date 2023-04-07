@@ -13,7 +13,7 @@ const DeleteTodo = ({ deleteCompleted, deleteAll }) => {
 
     return (
         <Paper style={{ margin: 16, padding: 16 }}>
-            <Grid justifyContent="space-between" container>
+            <Grid justifyContent="right" container>
                 <Grid item>
                     <div>
                         Delete Completed Items
@@ -25,6 +25,8 @@ const DeleteTodo = ({ deleteCompleted, deleteAll }) => {
                         </IconButton>
                     </div>
                 </Grid>
+            </Grid>
+            <Grid justifyContent="right" container>
                 <Grid item>
                     <div style={{ color: "crimson", fontWeight: "bold" }}>
                         [Warning!] DELETE ALL TODOs
