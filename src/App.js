@@ -15,6 +15,7 @@ import {
 import React, { useEffect, useState } from "react"
 import AddTodo from "./AddTodo"
 import call, { signout } from "./service/ApiService"
+import DeleteTodo from "./DeleteTodo"
 
 const App = () => {
     const [items, setItems] = useState([])
@@ -32,6 +33,20 @@ const App = () => {
 
     const update = (item) => {
         call("/todo", "PUT", item).then((response) => setItems(response.data))
+    }
+
+    const deleteCompleted = () => {
+        const completedItems = items.filter((e) => e.done === true)
+        completedItems.map((item) =>
+            call("/todo", "DELETE", item).then((response) =>
+                setItems(response.data)
+            )
+        )
+    }
+
+    const deleteAll = () => {
+        items.map((item) => call("/todo", "DELETE", item))
+        setItems([])
     }
 
     useEffect(() => {
@@ -75,12 +90,17 @@ const App = () => {
             {navigationBar}
             <Container maxWidth="md">
                 <AddTodo add={add} />
+                <DeleteTodo
+                    deleteCompleted={deleteCompleted}
+                    deleteAll={deleteAll}
+                />
+
                 <div className="TodoList">{todoItems}</div>
             </Container>
         </div>
     )
 
-    const loadingPage = <h1>로딩중..</h1>
+    const loadingPage = <h1>Loading...</h1>
     const content = loading ? loadingPage : todoListPage
 
     return <div className="App">{content}</div>

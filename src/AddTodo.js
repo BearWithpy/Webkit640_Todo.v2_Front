@@ -35,6 +35,7 @@ const AddTodo = ({ add }) => {
                 </Grid>
                 <Grid xs={1} md={1} item>
                     <Button
+                        style={{ height: "3.5rem" }}
                         fullWidth
                         color="secondary"
                         variant="outlined"
