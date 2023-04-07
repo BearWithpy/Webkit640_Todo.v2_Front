@@ -16,7 +16,7 @@ const DeleteTodo = ({ deleteCompleted, deleteAll }) => {
             <Grid justifyContent="right" container>
                 <Grid item>
                     <div>
-                        Delete Completed Items
+                        Delete Completed Items ON THIS PAGE
                         <IconButton
                             aria-label="Delete Completed Items"
                             onClick={deleteEventHandler}
