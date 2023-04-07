@@ -36,7 +36,7 @@ const App = () => {
     }
 
     const deleteCompleted = () => {
-        const completedItems = items.filter((e) => e.done === true)
+        const completedItems = items.filter((item) => item.done === true)
         completedItems.map((item) =>
             call("/todo", "DELETE", item).then((response) =>
                 setItems(response.data)
